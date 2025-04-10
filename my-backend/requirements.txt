@@ -8,4 +8,5 @@ Jinja2==3.1.6
 MarkupSafe==3.0.2
 numpy==2.2.4
 pillow==11.1.0
+scipy==1.15.2
 Werkzeug==3.1.3
