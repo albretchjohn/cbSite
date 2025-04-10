@@ -31,7 +31,7 @@ def create_image_with_number(number):
     draw = ImageDraw.Draw(image)
     
     max_font_size = 600
-    font_path = "C:/Windows/Fonts/arial.ttf"
+    font_path = "./Arial.ttf"
     font = None
     
     # Initialize variables for text dimensions
@@ -54,7 +54,10 @@ def create_image_with_number(number):
             # If font loading fails, fall back to the default font
             font = ImageFont.load_default()
             # Recalculate text dimensions using the default font
-            text_width, text_height = draw.textsize(str(number), font=font)
+            # text_width, text_height = draw.textsize(str(number), font=font)
+            text_bbox = draw.textbbox((0, 0), str(number), font=font)
+            text_width = text_bbox[2] - text_bbox[0]
+            text_height = text_bbox[3] - text_bbox[1]
             break
         max_font_size -= 1
 
