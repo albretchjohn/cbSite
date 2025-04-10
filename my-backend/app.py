@@ -33,21 +33,40 @@ def create_image_with_number(number):
     max_font_size = 600
     font_path = "C:/Windows/Fonts/arial.ttf"
     font = None
+    
+    # Initialize variables for text dimensions
+    text_width = 0
+    text_height = 0
+    
     while max_font_size > 0:
         try:
             font = ImageFont.truetype(font_path, max_font_size)
             text_bbox = draw.textbbox((0, 0), str(number), font=font)
+            
+            # text_bbox is a tuple (left, top, right, bottom)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
+            
+            # Check if the text fits within the image dimensions
             if text_width <= width and text_height <= height:
                 break
         except IOError:
+            # If font loading fails, fall back to the default font
             font = ImageFont.load_default()
+            # Recalculate text dimensions using the default font
+            text_width, text_height = draw.textsize(str(number), font=font)
             break
         max_font_size -= 1
 
+    # Ensure text_width and text_height are calculated before using them
+    if text_width == 0 or text_height == 0:
+        raise ValueError("Unable to calculate text dimensions")
+
+    # Calculate position to center the text
     text_x = (width - text_width) / 2
     text_y = (height - text_height) / 2 - text_height * 0.3
+    
+    # Draw the number text on the image
     draw.text((text_x, text_y), str(number), fill="black", font=font)
     
     return image
