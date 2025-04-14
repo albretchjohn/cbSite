@@ -24,18 +24,18 @@ TOTAL_CIRCLES = 1500
 
 color = lambda c: ((c >> 16) & 255, (c >> 8) & 255, c & 255)
 
-COLORS_ON = [  # Blueish tones (for the number)
-    color(0x6699CC),  # Muted light blue
-    color(0x5C85AD),  # Soft steel blue
-    color(0x4D7399)   # Dusty blue
+COLORS_ON = [  # Muted blue tones for numbers (cool, slightly grayish blues)
+    color(0x7286A0),  # Slate blue / dusty blue
+    color(0x5F7894),  # Desaturated steel blue
+    color(0x61788A)   # Muted denim blue
 ]
 
-COLORS_OFF = [  # Yellow-greenish tones (for the background)
-    color(0xC2C28F),  # Pale olive
-    color(0xDAD885),  # Faded yellow
-    color(0xB4C27C),  # Yellow-green
-    color(0xD4D490),  # Light khaki
-    color(0xBAC28F)   # Muted celery
+COLORS_OFF = [  # Pale, cool yellow-green tones for background (soft, pastel-like hues)
+    color(0xAAB892),  # Light olive green
+    color(0xBCC7A5),  # Pale sage green
+    color(0xB8C28E),  # Desaturated moss green
+    color(0xC5D2AA),  # Pale pistachio
+    color(0xD3DDB4)   # Faded chartreuse / muted lime
 ]
 
 
