@@ -24,10 +24,14 @@ TOTAL_CIRCLES = 1500
 
 color = lambda c: ((c >> 16) & 255, (c >> 8) & 255, c & 255)
 
-COLORS_ON = [  # Muted, purplish-blues
+COLORS_ON = [  # Muted, purplish-blues and yellow hues
     color(0x7585A2),  # Desaturated periwinkle
     color(0x6B7D95),  # Cool gray-blue
-    color(0x65788E)   # Dusty denim
+    color(0x65788E),  # Dusty denim
+    color(0xD8C95A),  # Muted yellow (soft mustard)
+    color(0xC5B94F),  # Olive yellow
+    color(0xF1D74E),  # Pale golden yellow
+    color(0xE1C24B)   # Slightly richer yellow-gold
 ]
 
 COLORS_OFF = [  # Bluish-teal tones, but low contrast
@@ -37,7 +41,6 @@ COLORS_OFF = [  # Bluish-teal tones, but low contrast
     color(0x9AB9BB),  # Light slate teal
     color(0xA3C2C3)   # Faded aquamarine-gray
 ]
-
 
 # Number generation part (unchanged)
 def create_image_with_number(number):
