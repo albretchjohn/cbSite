@@ -33,14 +33,13 @@ COLORS_ON = [  # Equal yellow and blue hues
     color(0xE1C24B)   # Slightly richer yellow-gold (yellow)
 ]
 
-
-
-COLORS_OFF = [  # Bluish-teal tones, but low contrast
-    color(0x7D9CA0),  # Cool dusty teal
-    color(0x86A4A7),  # Grayish cyan
-    color(0x90AFB1),  # Muted sky gray
-    color(0x9AB9BB),  # Light slate teal
-    color(0xA3C2C3),  # Faded aquamarine-gray
+COLORS_OFF = [  # Equal yellow and blue hues
+    color(0x7D9CA0),  # Cool dusty teal (blue)
+    color(0x86A4A7),  # Grayish cyan (blue)
+    color(0x90AFB1),  # Muted sky gray (blue)
+    color(0x9AB9BB),  # Light slate teal (blue)
+    color(0xA3C2C3),  # Faded aquamarine-gray (blue)
+    color(0xC5B94F),  # Olive yellow (yellow)
     color(0xD8C95A)   # Muted yellow (soft mustard) (yellow)
 ]
 
