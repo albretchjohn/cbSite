@@ -41,7 +41,6 @@ COLORS_OFF = [  # Bluish-teal tones, but low contrast
     color(0x90AFB1),  # Muted sky gray
     color(0x9AB9BB),  # Light slate teal
     color(0xA3C2C3),  # Faded aquamarine-gray
-    color(0xD8C95A)   # Muted yellow (soft mustard) (yellow)
 ]
 
 # Number generation part (unchanged)
