@@ -8,15 +8,6 @@ import io
 import numpy as np
 from scipy.spatial import cKDTree as cKDTree
 
-FONT_PATH = "./Arial.ttf"
-MAX_FONT_SIZE = 600
-
-
-try:
-    GLOBAL_FONT = ImageFont.truetype(FONT_PATH, MAX_FONT_SIZE)
-except IOError:
-    GLOBAL_FONT = ImageFont.load_default()
-
 app = Flask(__name__)
 
 BACKGROUND = (255, 255, 255)
@@ -24,18 +15,12 @@ TOTAL_CIRCLES = 1500
 
 color = lambda c: ((c >> 16) & 255, (c >> 8) & 255, c & 255)
 
-COLORS_ON = [  # Blue shades for the number
-    color(0x4A90E2),  # Light blue
-    color(0x3478F6),  # Medium blue
-    color(0x0057B8)   # Deep blue
+COLORS_ON = [
+    color(0xF9BB82), color(0xEBA170), color(0xFCCD84)
 ]
-
-COLORS_OFF = [  # Yellow/orange/green shades for the background
-    color(0xFFD166),  # Yellow-orange
-    color(0xFFB74D),  # Warm orange
-    color(0xE8C547),  # Gold
-    color(0xA7C957),  # Yellow-green
-    color(0xD4A017)   # Darker yellow
+COLORS_OFF = [
+    color(0x9CA594), color(0xACB4A5), color(0xBBB964),
+    color(0xD7DAAA), color(0xE5D57D), color(0xD1D6AF)
 ]
 
 
@@ -45,15 +30,36 @@ def create_image_with_number(number):
     image = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(image)
     
-    # max_font_size = 600
-    # font_path = "./Arial.ttf"
+    max_font_size = 600
+    font_path = "./Arial.ttf"
+    font = None
     
     # Initialize variables for text dimensions
-    font = GLOBAL_FONT
-    text_bbox = draw.textbbox((0, 0), str(number), font=font)
-    text_width = text_bbox[2] - text_bbox[0]
-    text_height = text_bbox[3] - text_bbox[1]
-
+    text_width = 0
+    text_height = 0
+    
+    while max_font_size > 0:
+        try:
+            font = ImageFont.truetype(font_path, max_font_size)
+            text_bbox = draw.textbbox((0, 0), str(number), font=font)
+            
+            # text_bbox is a tuple (left, top, right, bottom)
+            text_width = text_bbox[2] - text_bbox[0]
+            text_height = text_bbox[3] - text_bbox[1]
+            
+            # Check if the text fits within the image dimensions
+            if text_width <= width and text_height <= height:
+                break
+        except IOError:
+            # If font loading fails, fall back to the default font
+            font = ImageFont.load_default()
+            # Recalculate text dimensions using the default font
+            # text_width, text_height = draw.textsize(str(number), font=font)
+            text_bbox = draw.textbbox((0, 0), str(number), font=font)
+            text_width = text_bbox[2] - text_bbox[0]
+            text_height = text_bbox[3] - text_bbox[1]
+            break
+        max_font_size -= 1
 
     # Ensure text_width and text_height are calculated before using them
     if text_width == 0 or text_height == 0:
@@ -121,31 +127,27 @@ def generate_ishihara_plate(number):
     circle_positions.append((first_circle[0], first_circle[1]))  # Only store (x, y) in KD-Tree
     circle_draw(draw_image, image, first_circle)
     
-    # Create initial KD-Tree
-    tree = cKDTree(circle_positions)
-
-    #  Add this before the loop
-    tree_update_interval = 50
-
-    for i in range(TOTAL_CIRCLES - 1):
-        max_attempts = 50
-
+    # Create KD-Tree with first circle
+    tree = cKDTree(circle_positions)  # Efficient lookup structure
+    
+    for _ in range(TOTAL_CIRCLES - 1):
+        max_attempts = 50  # Avoid infinite loops
+        
         for _ in range(max_attempts):
             circle = generate_circle(width, height, min_diameter, max_diameter)
             x, y, r = circle
-
+            
+            # Query KD-Tree for nearby circles
             nearby_indices = tree.query_ball_point((x, y), r * 2)
-            if not nearby_indices:
+            if not nearby_indices:  # If no intersections, place the circle
                 circles.append(circle)
                 circle_positions.append((x, y))
                 circle_draw(draw_image, image, circle)
-
-                # ✅ KD-Tree rebuild after every 50 new circles
-                if len(circles) % tree_update_interval == 0:
-                    tree = cKDTree(circle_positions)
-
-                break
-
+                
+                # Update KD-Tree with new circle
+                tree = cKDTree(circle_positions)
+                break  # Successfully placed circle, exit attempt loop
+    
     return image2
 
 

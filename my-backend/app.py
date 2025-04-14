@@ -8,6 +8,15 @@ import io
 import numpy as np
 from scipy.spatial import cKDTree as cKDTree
 
+FONT_PATH = "./Arial.ttf"
+MAX_FONT_SIZE = 600
+
+
+try:
+    GLOBAL_FONT = ImageFont.truetype(FONT_PATH, MAX_FONT_SIZE)
+except IOError:
+    GLOBAL_FONT = ImageFont.load_default()
+
 app = Flask(__name__)
 
 BACKGROUND = (255, 255, 255)
@@ -30,36 +39,15 @@ def create_image_with_number(number):
     image = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(image)
     
-    max_font_size = 600
-    font_path = "./Arial.ttf"
-    font = None
+    # max_font_size = 600
+    # font_path = "./Arial.ttf"
     
     # Initialize variables for text dimensions
-    text_width = 0
-    text_height = 0
-    
-    while max_font_size > 0:
-        try:
-            font = ImageFont.truetype(font_path, max_font_size)
-            text_bbox = draw.textbbox((0, 0), str(number), font=font)
-            
-            # text_bbox is a tuple (left, top, right, bottom)
-            text_width = text_bbox[2] - text_bbox[0]
-            text_height = text_bbox[3] - text_bbox[1]
-            
-            # Check if the text fits within the image dimensions
-            if text_width <= width and text_height <= height:
-                break
-        except IOError:
-            # If font loading fails, fall back to the default font
-            font = ImageFont.load_default()
-            # Recalculate text dimensions using the default font
-            # text_width, text_height = draw.textsize(str(number), font=font)
-            text_bbox = draw.textbbox((0, 0), str(number), font=font)
-            text_width = text_bbox[2] - text_bbox[0]
-            text_height = text_bbox[3] - text_bbox[1]
-            break
-        max_font_size -= 1
+    font = GLOBAL_FONT
+    text_bbox = draw.textbbox((0, 0), str(number), font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+
 
     # Ensure text_width and text_height are calculated before using them
     if text_width == 0 or text_height == 0:
@@ -127,27 +115,31 @@ def generate_ishihara_plate(number):
     circle_positions.append((first_circle[0], first_circle[1]))  # Only store (x, y) in KD-Tree
     circle_draw(draw_image, image, first_circle)
     
-    # Create KD-Tree with first circle
-    tree = cKDTree(circle_positions)  # Efficient lookup structure
-    
-    for _ in range(TOTAL_CIRCLES - 1):
-        max_attempts = 50  # Avoid infinite loops
-        
+    # Create initial KD-Tree
+    tree = cKDTree(circle_positions)
+
+    #  Add this before the loop
+    tree_update_interval = 50
+
+    for i in range(TOTAL_CIRCLES - 1):
+        max_attempts = 50
+
         for _ in range(max_attempts):
             circle = generate_circle(width, height, min_diameter, max_diameter)
             x, y, r = circle
-            
-            # Query KD-Tree for nearby circles
+
             nearby_indices = tree.query_ball_point((x, y), r * 2)
-            if not nearby_indices:  # If no intersections, place the circle
+            if not nearby_indices:
                 circles.append(circle)
                 circle_positions.append((x, y))
                 circle_draw(draw_image, image, circle)
-                
-                # Update KD-Tree with new circle
-                tree = cKDTree(circle_positions)
-                break  # Successfully placed circle, exit attempt loop
-    
+
+                # ✅ KD-Tree rebuild after every 50 new circles
+                if len(circles) % tree_update_interval == 0:
+                    tree = cKDTree(circle_positions)
+
+                break
+
     return image2
 
 
