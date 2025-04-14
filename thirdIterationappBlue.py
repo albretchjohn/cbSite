@@ -24,18 +24,18 @@ TOTAL_CIRCLES = 1500
 
 color = lambda c: ((c >> 16) & 255, (c >> 8) & 255, c & 255)
 
-COLORS_ON = [  # Muted, purplish-blues
-    color(0x7585A2),  # Desaturated periwinkle
-    color(0x6B7D95),  # Cool gray-blue
-    color(0x65788E)   # Dusty denim
+COLORS_ON = [  # Muted blue tones for numbers (cool, slightly grayish blues)
+    color(0x7286A0),  # Slate blue / dusty blue
+    color(0x5F7894),  # Desaturated steel blue
+    color(0x61788A)   # Muted denim blue
 ]
 
-COLORS_OFF = [  # Bluish-teal tones, but low contrast
-    color(0x7D9CA0),  # Cool dusty teal
-    color(0x86A4A7),  # Grayish cyan
-    color(0x90AFB1),  # Muted sky gray
-    color(0x9AB9BB),  # Light slate teal
-    color(0xA3C2C3)   # Faded aquamarine-gray
+COLORS_OFF = [  # Pale, cool yellow-green tones for background (soft, pastel-like hues)
+    color(0xAAB892),  # Light olive green
+    color(0xBCC7A5),  # Pale sage green
+    color(0xB8C28E),  # Desaturated moss green
+    color(0xC5D2AA),  # Pale pistachio
+    color(0xD3DDB4)   # Faded chartreuse / muted lime
 ]
 
 
