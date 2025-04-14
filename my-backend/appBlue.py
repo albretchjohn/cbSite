@@ -35,12 +35,24 @@ COLORS_ON = [  # Equal yellow and blue hues
 
 
 
-COLORS_OFF = [  # Bluish-teal tones, but low contrast
-    color(0x7D9CA0),  # Cool dusty teal
-    color(0x86A4A7),  # Grayish cyan
-    color(0x90AFB1),  # Muted sky gray
-    color(0x9AB9BB),  # Light slate teal
-    color(0xA3C2C3),  # Faded aquamarine-gray
+COLORS_OFF = [
+    # Muted purples / dusty pinks
+    color(0xC9A9BD),  # Dusty lavender
+    color(0xD9B18E),  # Faded peach
+    color(0xD8B2CC),  # Soft mauve pink
+    color(0xE7C6A6),  # Soft sand
+    color(0xE5C4D7),  # Pale orchid
+    color(0xF2D7B6)   # Creamy beige
+    
+    # Muted purples / dusty pinks
+        # color(0xC9A9BD),  # Dusty lavender
+        # color(0xD8B2CC),  # Soft mauve pink
+        # color(0xE5C4D7),  # Pale orchid
+
+    # Muted oranges / peach tones
+        # color(0xD9B18E),  # Faded peach
+        # color(0xE7C6A6),  # Soft sand
+        # color(0xF2D7B6)   # Creamy beige
 ]
 
 # Number generation part (unchanged)
