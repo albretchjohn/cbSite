@@ -25,28 +25,12 @@ TOTAL_CIRCLES = 1500
 color = lambda c: ((c >> 16) & 255, (c >> 8) & 255, c & 255)
 
 COLORS_ON = [  # Equal yellow and blue hues
-
-    
-    
-    color(0xA9BBD3),  # Light steel blue
+    color(0x7585A2),  # Desaturated periwinkle (blue)
+    color(0x65788E),  # Dusty denim (blue)
+    color(0x6B7D95),  # Cool gray-blue (blue)
     color(0xD8C95A),  # Muted yellow (soft mustard)
-    color(0xB3C1D9),  # Pale sky blue
-    color(0xF1D74E),  # Pale golden yellow
-    color(0xC2CDDF),  # Powdery blue-gray
-    color(0xE1C24B)   # Slightly richer yellow-gold
-    
-    
-    # Lighter blue hues
-    # color(0xA9BBD3),  # Light steel blue
-    # color(0xB3C1D9),  # Pale sky blue
-    # color(0xC2CDDF),  # Powdery blue-gray
-
-    #  Yellow hues (unchanged)
-    # color(0xD8C95A),  # Muted yellow (soft mustard)
-    # color(0xF1D74E),  # Pale golden yellow
-    # color(0xE1C24B)   # Slightly richer yellow-gold
-
-
+    color(0xF1D74E),  # Pale golden yellow (yellow)
+    color(0xE1C24B)   # Slightly richer yellow-gold (yellow)
 ]
 
 
