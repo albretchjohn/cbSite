@@ -37,20 +37,25 @@ COLORS_ON = [  # All yellow hues
 
 
 COLORS_OFF = [
-    
-    color(0xD4C38A),  # Muted sand yellow
-    
-    color(0xBFAF77),  # Olive-tinted yellow
-    
-    color(0xE3D8A1),  # Pale ivory yellow
-    
+    color(0xEFD469),  # Soft marigold yellow
+    color(0xE1C24B),  # Slightly richer yellow-gold
+    # Muted purples / dusty pinks
     color(0xC9A9BD),  # Dusty lavender
     color(0xD9B18E),  # Faded peach
     color(0xD8B2CC),  # Soft mauve pink
     color(0xE7C6A6),  # Soft sand
     color(0xE5C4D7),  # Pale orchid
+    # color(0xF2D7B6)   # Creamy beige
     
-    
+    # Muted purples / dusty pinks
+        # color(0xC9A9BD),  # Dusty lavender
+        # color(0xD8B2CC),  # Soft mauve pink
+        # color(0xE5C4D7),  # Pale orchid
+
+    # Muted oranges / peach tones
+        # color(0xD9B18E),  # Faded peach
+        # color(0xE7C6A6),  # Soft sand
+        # color(0xF2D7B6)   # Creamy beige
 ]
 
 # Number generation part (unchanged)
