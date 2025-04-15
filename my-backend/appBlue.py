@@ -37,8 +37,6 @@ COLORS_ON = [  # All yellow hues
 
 
 COLORS_OFF = [
-    color(0xEFD469),  # Soft marigold yellow
-    color(0xE1C24B),  # Slightly richer yellow-gold
     # Muted purples / dusty pinks
     color(0xC9A9BD),  # Dusty lavender
     color(0xD9B18E),  # Faded peach
