@@ -37,6 +37,7 @@ COLORS_ON = [  # All yellow hues
 
 
 COLORS_OFF = [
+    color(0xD8C95A),  # Muted yellow (soft mustard)
     # Muted purples / dusty pinks
     color(0xC9A9BD),  # Dusty lavender
     color(0xD9B18E),  # Faded peach
