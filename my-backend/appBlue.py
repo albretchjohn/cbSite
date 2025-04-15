@@ -38,13 +38,14 @@ COLORS_ON = [  # All yellow hues
 
 COLORS_OFF = [
     color(0xD8C95A),  # Muted yellow (soft mustard)
+    color(0xF1D74E),  # Pale golden yellow
     # Muted purples / dusty pinks
     color(0xC9A9BD),  # Dusty lavender
     color(0xD9B18E),  # Faded peach
     color(0xD8B2CC),  # Soft mauve pink
     color(0xE7C6A6),  # Soft sand
     color(0xE5C4D7),  # Pale orchid
-    color(0xF2D7B6)   # Creamy beige
+    # color(0xF2D7B6)   # Creamy beige
     
     # Muted purples / dusty pinks
         # color(0xC9A9BD),  # Dusty lavender
